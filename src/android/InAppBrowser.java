@@ -1157,9 +1157,11 @@ public class InAppBrowser extends CordovaPlugin {
                     try {
                         // Try to find an installed app
                         Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
-                        if (intent.resolveActivity(packageManager) != null) {
+                        try {
                                 cordova.getActivity().startActivity(intent);
                                 return true;
+                        } catch (android.content.ActivityNotFoundException e) {
+                                LOG.e(LOG_TAG, "Error with " + url + ": " + e.toString());
                         }
                         // Try to open the fallback URL
                         String fallbackUrl = intent.getStringExtra("browser_fallback_url");
