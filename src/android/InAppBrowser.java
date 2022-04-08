@@ -1148,8 +1148,8 @@ public class InAppBrowser extends CordovaPlugin {
             try {
                  cordova.getActivity().startActivity(browseIntent);
                  return true;
-            } catch (ActivityNotFoundException e) {
-               // nothing
+            } catch (android.content.ActivityNotFoundException e) {
+                 LOG.e(LOG_TAG, "Error with " + url + ": " + e.toString());
             }
 
             // If link is an INTENT then handle as 1) open the associated app, 2) open the fallback URL or 3) go to Store and look for an app
